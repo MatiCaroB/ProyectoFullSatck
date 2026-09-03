@@ -1,2 +1,2 @@
 # ProyectoFullSatck
-Pagiande fullstack2 para la primera prueba
+Pagina de fullstack2 para la primera prueba
