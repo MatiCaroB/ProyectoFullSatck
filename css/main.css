@@ -1,12 +1,15 @@
 header{
-    background-color: #696969;
+    background-color: #fdc201;
+    text-align: center;
     
 }
 
-header {
-     
-    text-align: center;
+header img{
+    padding-bottom: 10px;
+}
 
+#formContacto{
+    max-width: 720;
 }
 #menu{
     background-color: aliceblue;
@@ -19,14 +22,7 @@ header {
     font-weight: bold; 
     text-decoration: none;
 }
-#aboutUs{
-    /* si paso dos valores al padding o al margin, el primero afecta al eje y; el segundo al eje x*/
-    padding: 12px 20px;
-    border-style: dashed;
-    margin-top: 14px;
-    border-color: rgba(70, 71, 71, 0.116);
-    border-radius: 12px;
-    text-align: center;
+
 }
 #productos{
     display: grid;
