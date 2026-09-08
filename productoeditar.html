@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Producto - Geek&Manga</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script defer src="js/editar.js"></script>
+</head>
+<body class="bg-dark">
+    <header>
+        <img width="300" height="300" src="images/logito.png" alt="logo geek&manga">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand fw-bold" href="index.html">Home</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#home">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="home">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link active" href="productoagregar.html">Productos</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="usuarios.html">Usuarios</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>   
+
+    <main class="container my-4">
+        <h1 class="text-light">Editar Producto</h1>
+        <section class="container">
+            <form id="formEditar" class="bg-dark p-4 my-4 rounded shadow-sm mx-auto border border-secondary">
+                <input type="hidden" id="productoId">
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="producto" class="form-label text-light">Nombre del Producto</label>
+                        <input type="text" required id="producto" name="producto" class="form-control bg-dark text-light">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="precio" class="form-label text-light">Precio del Producto</label>
+                        <input type="number" step="0.01" min="0" required id="precio" name="precio" class="form-control bg-dark text-light">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="marca" class="form-label text-light">Marca del producto</label>
+                        <input type="text" required id="marca" name="marca" class="form-control bg-dark text-light">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label text-light">Descripción</label>
+                    <textarea required id="descripcion" name="descripcion" rows="3" class="form-control bg-dark text-light"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="foto" class="form-label text-light">Cambiar foto (Opcional)</label>
+                    <input type="file" id="foto" name="foto" accept="image/*" class="form-control bg-dark text-light">
+                    
+                    <div class="mt-3">
+                        <p class="text-light mb-1">Imagen actual / Vista previa:</p>
+                        <img id="vistaPrevia" src="" alt="Vista previa" class="img-fluid rounded d-none" style="max-height: 200px;">
+                    </div>
+                </div>
+                
+                <button id="btnGuardar" type="submit" class="btn btn-warning btn-lg fw-bold">Guardar Cambios</button>
+                <a href="productoagregar.html" class="btn btn-secondary btn-lg ms-2">Cancelar</a>
+            </form>
+        </section>
+    </main>
+    
+    <footer></footer>   
+</body>
+</html>

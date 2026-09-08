@@ -82,31 +82,128 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });*/
 
-
-const formProductos = document.getElementById('formAgregarProducto');
-const inputProducto = document.getElementById('nombreProducto');
-const inputPrecio = document.getElementById('precioProducto');
-
-formProductos.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  const producto = inputProducto.value.trim();
-  const precio = parseFloat(inputPrecio.value.trim());
-
-  if (!producto || isNaN(precio)) {
-    alert('Por favor ingresa un nombre y un precio válido.');
-    return;
-  }
-
-  const productosGuardados = JSON.parse(localStorage.getItem('productos')) || [];
-
-  productosGuardados.push({
-    nombre: producto,
-    precio: precio
-  });
-
-  localStorage.setItem('productos', JSON.stringify(productosGuardados));
-
-  formProductos.reset();
-  alert('Producto agregado');
+/*AGREGARPRODUCTO.HTML*/ 
+document.addEventListener('DOMContentLoaded', () => {
+    const formContacto = document.getElementById('formContacto');
+    const inputFoto = document.getElementById('foto');
+    const imgVistaPrevia = document.getElementById('vistaPrevia');
+    let fotoBase64 = ''; 
+    inputFoto.addEventListener('change', (event) => {
+        const archivo = event.target.files[0];
+        if (archivo) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                fotoBase64 = e.target.result;
+                imgVistaPrevia.src = fotoBase64;
+                imgVistaPrevia.classList.remove('d-none'); 
+            };
+            reader.readAsDataURL(archivo);
+        } else {
+            fotoBase64 = '';
+            imgVistaPrevia.src = '';
+            imgVistaPrevia.classList.add('d-none');
+        }
+    });
+    formContacto.addEventListener('submit', (event) => {
+        event.preventDefault(); 
+        const nuevoProducto = {
+            id: Date.now(),
+            producto: document.getElementById('producto').value,
+            precio: parseFloat(document.getElementById('precio').value),
+            marca: document.getElementById('marca').value,
+            descripcion: document.getElementById('descripcion').value,
+            foto: fotoBase64 
+        };
+        const productosGuardados = JSON.parse(localStorage.getItem('productos')) || [];
+        productosGuardados.push(nuevoProducto);
+        localStorage.setItem('productos', JSON.stringify(productosGuardados));
+        alert('¡Producto guardado exitosamente en LocalStorage!');
+        formContacto.reset();
+        fotoBase64 = '';
+        imgVistaPrevia.src = '';
+        imgVistaPrevia.classList.add('d-none');
+    });
 });
+/*PRODUCTOMOSTRAR.HTML */
+document.addEventListener('DOMContentLoaded', () => {
+    const formContacto = document.getElementById('formContacto');
+    const inputFoto = document.getElementById('foto');
+    const imgVistaPrevia = document.getElementById('vistaPrevia');
+    const contenedorLista = document.getElementById('listaProductos');
+    let fotoBase64 = '';
+    mostrarProductos();
+    inputFoto.addEventListener('change', (event) => {
+        const archivo = event.target.files[0];
+        if (archivo) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                fotoBase64 = e.target.result;
+                imgVistaPrevia.src = fotoBase64;
+                imgVistaPrevia.classList.remove('d-none');
+            };
+            reader.readAsDataURL(archivo);
+        } else {
+            fotoBase64 = '';
+            imgVistaPrevia.src = '';
+            imgVistaPrevia.classList.add('d-none');
+        }
+    });
+    formContacto.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const nuevoProducto = {
+            id: Date.now(),
+            producto: document.getElementById('producto').value,
+            precio: parseFloat(document.getElementById('precio').value),
+            marca: document.getElementById('marca').value,
+            descripcion: document.getElementById('descripcion').value,
+            foto: fotoBase64
+        };
+        const productosGuardados = JSON.parse(localStorage.getItem('productos')) || [];
+        productosGuardados.push(nuevoProducto);
+        localStorage.setItem('productos', JSON.stringify(productosGuardados));
+        alert('¡Producto guardado exitosamente!');
+        formContacto.reset();
+        fotoBase64 = '';
+        imgVistaPrevia.src = '';
+        imgVistaPrevia.classList.add('d-none');
+        
+        mostrarProductos();
+    });
+    function mostrarProductos() {
+        const productos = JSON.parse(localStorage.getItem('productos')) || [];
+        contenedorLista.innerHTML = ''; 
+        if (productos.length === 0) {
+            contenedorLista.innerHTML = '<p class="text-light col-12">No hay productos guardados aún.</p>';
+            return;
+        }
+        productos.forEach((item) => {
+            const col = document.createElement('div');
+            col.className = 'col';
+            col.innerHTML = `
+                <div class="card h-100 bg-dark text-light border-secondary shadow-sm">
+                    <img src="${item.foto}" class="card-img-top" alt="${item.producto}" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <span class="badge bg-primary mb-2">${item.marca}</span>
+                        <h5 class="card-title">${item.producto}</h5>
+                        <p class="card-text text-truncate">${item.descripcion}</p>
+                        <p class="card-text fw-bold fs-5 text-success">$${item.precio.toFixed(2)}</p>
+                    </div>
+                    <div class="card-footer border-secondary d-flex justify-content-between">
+                        <a href="productoeditar.html?id=${item.id}" class="btn btn-warning btn-sm fw-bold">Editar</a>
+                        <button class="btn btn-danger btn-sm" onclick="eliminarProducto(${item.id})">Eliminar</button>
+                    </div>
+                </div>
+            `;
+            contenedorLista.appendChild(col);
+        });
+    }
+});
+function eliminarProducto(id) {
+    if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
+        let productos = JSON.parse(localStorage.getItem('productos')) || [];
+        productos = productos.filter(p => p.id !== id);
+        localStorage.setItem('productos', JSON.stringify(productos));
+        location.reload(); 
+    }
+}
+
