@@ -1,0 +1,30 @@
+falta, contactos y hacer lo del carrito con respecto a la vista de tienda
+
+-Hacer cambios con respecto a los html de producto agregar/editar/mostrar 
+para uqe se adaptena los requisitos de vista de admin 
+
+HAY QUE HACER EL PUTO INFORME!!!!!! CTM
+
+eso
+
+
+
+ARCHIVOS DE VISTA DE TIENDA 
+- blogs.html
+- detalleBlogs1.html
+- detalleBlogs2.html
+- detalleProducto.html
+- index.html
+- login.html
+- nosotros.html
+- productos.html
+- usuarios.html 
+
+
+(no estoy segura a donde va editarusuario.html pero creo que va en admin)
+
+ARCHIVOS DE VISTA ADMIN
+- productoeditar.html
+- productomostrar.html
+- productoagregar.html
+- lo demas que falta .html 

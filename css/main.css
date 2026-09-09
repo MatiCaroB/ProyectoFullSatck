@@ -9,7 +9,16 @@ header img{
 }
 
 #formContacto{
-    max-width: 720;
+    max-width: 720px;
+}
+#formUsuario{
+    border-radius: 30px;
+}
+
+.container-registrarse{
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 #menu{
     background-color: aliceblue;
@@ -23,7 +32,7 @@ header img{
     text-decoration: none;
 }
 
-}
+
 #productos{
     display: grid;
     grid-template-columns: 1fr ;
@@ -68,3 +77,60 @@ header img{
 
 }
 
+/* =======================================================
+   Formularios de Registro / Login
+   ======================================================= */
+.container-login{
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Mejor contraste de los mensajes de error/éxito sobre fondo oscuro */
+.invalid-feedback{
+    color: #ff8a8a;
+}
+.valid-feedback{
+    color: #8affa0;
+}
+.form-control.is-invalid,
+.form-select.is-invalid{
+    border-color: #ff8a8a;
+}
+.form-control.is-valid,
+.form-select.is-valid{
+    border-color: #8affa0;
+}
+
+/* =======================================================
+   Nosotros / Blogs
+   ======================================================= */
+.img-placeholder{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e9ecef;
+    color: #6c757d;
+    border: 1px dashed #adb5bd;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    text-align: center;
+    min-height: 220px;
+}
+
+.card-blog img,
+.card-blog .img-placeholder{
+    height: 220px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.card-equipo{
+    text-align: center;
+}
+.card-equipo .img-placeholder{
+    min-height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    margin: 0 auto 12px;
+}

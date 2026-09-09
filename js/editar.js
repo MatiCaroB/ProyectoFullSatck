@@ -1,9 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     const formEditar = document.getElementById('formEditar');
     const inputId = document.getElementById('productoId');
+    const inputCodigo = document.getElementById('codigo');
     const inputProducto = document.getElementById('producto');
     const inputPrecio = document.getElementById('precio');
     const inputMarca = document.getElementById('marca');
+    const inputStock = document.getElementById('stock');
+    const inputStockCritico = document.getElementById('stockCritico');
+    const inputCategoria = document.getElementById('categoria');
     const inputDescripcion = document.getElementById('descripcion');
     const inputFoto = document.getElementById('foto');
     const imgVistaPrevia = document.getElementById('vistaPrevia');
@@ -19,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="alert alert-warning border-0 shadow">
                     <h2 class="h4 fw-bold">⚠️ Ningún producto seleccionado para editar</h2>
                     <p class="mb-3">Debes seleccionar un producto desde la lista principal para poder modificarlo.</p>
-                    <a href="productoagregar.html" class="btn btn-primary fw-bold">Volver a Productos</a>
+                    <a href="productomostrar.html" class="btn btn-primary fw-bold">Volver a Productos</a>
                 </div>
             </div>
         `;
@@ -41,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="alert alert-danger border-0 shadow">
                     <h2 class="h4 fw-bold">❌ Producto no encontrado</h2>
                     <p class="mb-3">El producto con ID <strong>${idParam}</strong> no existe o fue eliminado.</p>
-                    <a href="productoagregar.html" class="btn btn-primary fw-bold">Volver a Productos</a>
+                    <a href="productomostrar.html" class="btn btn-primary fw-bold">Volver a Productos</a>
                 </div>
             </div>
         `;
@@ -50,9 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Cargar datos actuales
     inputId.value = productoEncontrado.id;
+    if (inputCodigo) inputCodigo.value = productoEncontrado.codigo || '';
     inputProducto.value = productoEncontrado.producto || '';
     inputPrecio.value = productoEncontrado.precio || 0;
-    inputMarca.value = productoEncontrado.marca || '';
+    if (inputMarca) inputMarca.value = productoEncontrado.marca || '';
+    if (inputStock) inputStock.value = productoEncontrado.stock ?? 0;
+    if (inputStockCritico) inputStockCritico.value = productoEncontrado.stockCritico ?? '';
+    if (inputCategoria) inputCategoria.value = productoEncontrado.categoria || '';
     inputDescripcion.value = productoEncontrado.descripcion || '';
 
     if (productoEncontrado.foto) {
@@ -82,10 +90,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const index = productos.findIndex(item => String(item.id) === String(idParam));
 
             if (index !== -1) {
-                productos[index].producto = inputProducto.value;
+                productos[index].producto = inputProducto.value.trim();
                 productos[index].precio = parseFloat(inputPrecio.value);
-                productos[index].marca = inputMarca.value;
-                productos[index].descripcion = inputDescripcion.value;
+                if (inputMarca) productos[index].marca = inputMarca.value.trim();
+                if (inputStock) productos[index].stock = parseInt(inputStock.value, 10);
+                if (inputStockCritico) {
+                    productos[index].stockCritico = inputStockCritico.value !== '' ? parseInt(inputStockCritico.value, 10) : null;
+                }
+                if (inputCategoria) productos[index].categoria = inputCategoria.value;
+                productos[index].descripcion = inputDescripcion.value.trim();
 
                 if (nuevaFotoBase64 !== '') {
                     productos[index].foto = nuevaFotoBase64;
@@ -93,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 localStorage.setItem('productos', JSON.stringify(productos));
                 alert('¡Producto actualizado con éxito!');
-                window.location.href = 'productoagregar.html';
+                window.location.href = 'productomostrar.html';
             }
         });
     }

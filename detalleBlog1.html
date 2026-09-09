@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geek&Manga - El origen del manga moderno</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/main.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script defer src="js/app.js"></script>
+</head>
+<body>
+    <header>
+
+         <img width="300" height="300" src="images/logito.png" alt="logo geek&manga">
+
+         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand fw-dold" href="index.html"> Home</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#home"
+                aria-controls="home" aria-expanded="false" aria-label="abrir home"><span class="navbar-toggler-icon"></span></button>
+
+                    <div class="collapse navbar-collapse" id="home">
+                        <ul class="navbar-nav ms-auto align-items-lg-center">
+                            <li class="nav-item"><a class="nav-link active" href="productos.html">Productos</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="nosotros.html">Nosotros</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="blogs.html">Blogs</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="#">Contacto</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="usuarios.html">Registrarse</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="login.html">Iniciar sesión</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#" id="linkCarrito">🛒 Carrito (<span id="contadorCarrito">0</span>)</a>
+                            </li>
+                        </ul>
+                    </div>
+            </div>
+         </nav>
+      </header>
+<!--los casos curiosos son de ejemplo sujeto a cambios o no es una idea pero se ve cool-->
+    <main class="container my-5">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="blogs.html">Blogs</a></li>
+                <li class="breadcrumb-item active">El origen del manga moderno</li>
+            </ol>
+        </nav>
+
+        <article>
+            <div class="img-placeholder mb-4" style="min-height: 320px;">Imagen: El origen del manga moderno</div>
+
+            <h1>Caso curioso #1: El origen del manga moderno</h1>
+            <p class="text-muted">Publicado por el equipo de Geek&amp;Manga</p>
+
+            <p>
+                Cuando pensamos en manga, imaginamos viñetas dinámicas, líneas de velocidad y
+                expresiones exageradas que le dan vida a cada historia. Pero, ¿de dónde viene
+                realmente este estilo tan característico?
+            </p>
+            <p>
+                Aunque Japón cuenta con una larguísima tradición de narrativa gráfica —desde los
+                rollos ilustrados "emakimono" del período Heian hasta las estampas "ukiyo-e" del
+                período Edo—, el manga tal como lo conocemos hoy tomó forma recién a mediados del
+                siglo XX. Uno de los nombres clave en esta historia es Osamu Tezuka, creador de
+                obras como "Astro Boy", quien incorporó técnicas narrativas inspiradas en el cine:
+                planos cerrados, encuadres dinámicos y una edición de viñetas que guiaba el ritmo
+                de lectura casi como una película fotograma a fotograma.
+            </p>
+            <p>
+                Esta fusión entre la tradición ilustrativa japonesa y el lenguaje cinematográfico
+                occidental dio origen a un formato narrativo completamente nuevo: historias largas,
+                serializadas en revistas semanales o mensuales, con géneros para todas las edades
+                y gustos —shonen, shojo, seinen, josei— que permitieron que el manga se convirtiera
+                en una industria masiva dentro y fuera de Japón.
+            </p>
+            <p>
+                Hoy, el manga no solo se lee: se colecciona, se exhibe y se celebra en convenciones
+                alrededor del mundo. Cada tomo que llega a nuestra tienda es parte de esa larga
+                historia de evolución artística y narrativa que sigue creciendo con cada nueva
+                generación de lectores.
+            </p>
+
+            <a href="blogs.html" class="btn btn-secondary mt-3">&larr; Volver a Blogs</a>
+        </article>
+    </main>
+
+    <footer class="bg-dark text-light text-center py-4 mt-5">
+        <p class="mb-1">Geek&amp;Manga &copy; 2026</p>
+        <a href="#" class="text-light text-decoration-none">Contacto</a>
+    </footer>
+</body>
+</html>
