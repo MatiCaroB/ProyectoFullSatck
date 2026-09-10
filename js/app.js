@@ -1,6 +1,6 @@
-// =======================================================
+
 // Utilidades de productos (localStorage)
-// =======================================================
+
 
 function obtenerProductos() {
   try {
@@ -14,9 +14,57 @@ function guardarProductos(productos) {
   localStorage.setItem('productos', JSON.stringify(productos));
 }
 
-// =======================================================
+function inicializarProductosPorDefecto() {
+  const productosActuales = obtenerProductos();
+
+  if (productosActuales.length > 0) {
+    return;
+  }
+
+  const productosDemo = [
+    {
+      id: 'demo-1',
+      codigo: 'M001',
+      producto: 'One Piece - Tomo 1',
+      precio: 15990,
+      marca: 'Shueisha',
+      stock: 12,
+      stockCritico: 5,
+      categoria: 'Manga',
+      descripcion: 'Primera edición del clásico manga de Eiichiro Oda.',
+      foto: 'images/onepiece.jpg'
+    },
+    {
+      id: 'demo-2',
+      codigo: 'F001',
+      producto: 'Figura Naruto',
+      precio: 24990,
+      marca: 'Banpresto',
+      stock: 8,
+      stockCritico: 3,
+      categoria: 'Figura',
+      descripcion: 'Figura coleccionable del personaje Naruto Uzumaki.',
+      foto: 'images/naruto.jpg'
+    },
+    {
+      id: 'demo-3',
+      codigo: 'C001',
+      producto: 'Comic Marvel - Spider-Man',
+      precio: 12990,
+      marca: 'Marvel',
+      stock: 10,
+      stockCritico: 4,
+      categoria: 'Comic',
+      descripcion: 'Edición especial de Spider-Man para coleccionistas.',
+      foto: 'images/spiderman.jpg'
+    }
+  ];
+
+  guardarProductos(productosDemo);
+}
+
+
 // Carrito de compras (localStorage)
-// =======================================================
 
 function obtenerCarrito() {
   try {
@@ -29,6 +77,11 @@ function obtenerCarrito() {
 function guardarCarrito(carrito) {
   localStorage.setItem('carrito', JSON.stringify(carrito));
   actualizarContadorCarrito();
+}
+
+function obtenerProductoPorId(idProducto) {
+  const productos = obtenerProductos();
+  return productos.find((p) => String(p.id) === String(idProducto));
 }
 
 function agregarAlCarrito(idProducto, cantidad) {
@@ -54,11 +107,155 @@ function actualizarContadorCarrito() {
   contador.textContent = totalUnidades;
 }
 
-document.addEventListener('DOMContentLoaded', actualizarContadorCarrito);
+document.addEventListener('DOMContentLoaded', () => {
+  inicializarProductosPorDefecto();
+  actualizarContadorCarrito();
 
-// =======================================================
+  const carritoLista = document.getElementById('carritoLista');
+  if (carritoLista) {
+    renderizarCarrito();
+  }
+});
+
+function renderizarCarrito() {
+  const contenedor = document.getElementById('carritoLista');
+  const totalElemento = document.getElementById('carritoTotal');
+  const vaciarBoton = document.getElementById('btnVaciarCarrito');
+  const botonComprar = document.getElementById('btnComprar');
+
+  if (!contenedor) return;
+
+  const carrito = obtenerCarrito();
+  const productos = obtenerProductos();
+
+  if (!carrito.length) {
+    contenedor.innerHTML = `
+      <div class="carrito-vacio">
+        <h3>Tu carrito está vacío</h3>
+        <p>Aún no has agregado productos. Explora nuestra colección y encuentra tu próxima compra.</p>
+        <a href="productos.html" class="btn btn-warning">Ver productos</a>
+      </div>
+    `;
+
+    if (totalElemento) totalElemento.textContent = '$0';
+    return;
+  }
+
+  let totalGeneral = 0;
+
+  contenedor.innerHTML = carrito.map((item) => {
+    const producto = productos.find((p) => String(p.id) === String(item.id));
+    if (!producto) return '';
+
+    const subtotal = Number(producto.precio) * Number(item.cantidad);
+    totalGeneral += subtotal;
+
+    return `
+      <div class="carrito-item">
+        <div class="carrito-imagen">
+          ${producto.foto ? `<img src="${producto.foto}" alt="${producto.producto}">` : '<div class="carrito-sin-imagen">Sin imagen</div>'}
+        </div>
+
+        <div class="carrito-info">
+          <h3>${producto.producto}</h3>
+          <p>${producto.categoria || 'Sin categoría'}</p>
+          <p class="precio">$${Number(producto.precio).toLocaleString('es-CL')}</p>
+        </div>
+
+        <div class="carrito-controles">
+          <div class="cantidad-box">
+            <button type="button" class="btn btn-sm btn-outline-light" data-accion-cantidad="resta" data-id="${producto.id}">-</button>
+            <span>${item.cantidad}</span>
+            <button type="button" class="btn btn-sm btn-outline-light" data-accion-cantidad="suma" data-id="${producto.id}">+</button>
+          </div>
+          <button type="button" class="btn btn-link text-danger p-0" data-eliminar-item="${producto.id}">Eliminar</button>
+        </div>
+
+        <div class="carrito-subtotal">
+          <span>Subtotal</span>
+          <strong>$${subtotal.toLocaleString('es-CL')}</strong>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  if (totalElemento) totalElemento.textContent = `$${totalGeneral.toLocaleString('es-CL')}`;
+
+  document.querySelectorAll('[data-accion-cantidad]').forEach((boton) => {
+    boton.addEventListener('click', () => {
+      const id = boton.dataset.id;
+      const accion = boton.dataset.accionCantidad;
+      const carritoActual = obtenerCarrito();
+      const encontrado = carritoActual.find((item) => String(item.id) === String(id));
+
+      if (!encontrado) return;
+
+      if (accion === 'suma') {
+        encontrado.cantidad += 1;
+      } else {
+        encontrado.cantidad -= 1;
+      }
+
+      const nuevoCarrito = carritoActual.filter((item) => item.cantidad > 0);
+      guardarCarrito(nuevoCarrito);
+      renderizarCarrito();
+    });
+  });
+
+  document.querySelectorAll('[data-eliminar-item]').forEach((boton) => {
+    boton.addEventListener('click', () => {
+      const id = boton.dataset.eliminarItem;
+      const carritoActual = obtenerCarrito().filter((item) => String(item.id) !== String(id));
+      guardarCarrito(carritoActual);
+      renderizarCarrito();
+    });
+  });
+
+  if (vaciarBoton) {
+    vaciarBoton.onclick = () => {
+      guardarCarrito([]);
+      renderizarCarrito();
+    };
+  }
+
+  if (botonComprar) {
+    botonComprar.disabled = !carrito.length;
+    botonComprar.onclick = () => {
+      if (!carrito.length) return;
+
+      const productosCarrito = obtenerCarrito();
+      const productosDisponibles = obtenerProductos();
+      let total = 0;
+
+      productosCarrito.forEach((item) => {
+        const producto = productosDisponibles.find((p) => String(p.id) === String(item.id));
+        if (producto) {
+          total += Number(producto.precio) * Number(item.cantidad);
+        }
+      });
+
+      const resumen = productosCarrito.map((item) => {
+        const producto = productosDisponibles.find((p) => String(p.id) === String(item.id));
+        if (!producto) return '';
+        return `- ${producto.producto} x${item.cantidad} = $${(Number(producto.precio) * Number(item.cantidad)).toLocaleString('es-CL')}`;
+      }).filter(Boolean).join('\n');
+
+      const confirmar = confirm(
+        `Resumen del pedido:\n\n${resumen}\n\nTotal: $${total.toLocaleString('es-CL')}\n\n¿Deseas confirmar la compra?`
+      );
+
+      if (!confirmar) return;
+
+      guardarCarrito([]);
+      renderizarCarrito();
+      alert('¡Compra realizada con éxito! Gracias por tu compra.');
+    };
+  }
+}
+
+
 // Formulario: Agregar producto (productoagregar.html)
-// =======================================================
+
 
 const formAgregar = document.getElementById('formContacto');
 
@@ -158,9 +355,8 @@ if (formAgregar && document.getElementById('codigo')) {
   });
 }
 
-// =======================================================
+
 // Listado de productos (productomostrar.html)
-// =======================================================
 
 const contenedorLista = document.getElementById('listaProductos');
 
@@ -211,9 +407,9 @@ function eliminarProducto(id) {
   renderizarProductos();
 }
 
-// =======================================================
+
 // Listado público de productos (index.html / vista tienda)
-// =======================================================
+
 
 const contenedorHome = document.getElementById('listaProductosHome');
 
@@ -246,9 +442,9 @@ function renderizarProductosPublico() {
   });
 }
 
-// =======================================================
+
 // Catálogo público de productos (productos.html)
-// =======================================================
+
 
 const contenedorCatalogo = document.getElementById('listaProductosCatalogo');
 
@@ -288,9 +484,8 @@ function renderizarCatalogo() {
   });
 }
 
-// =======================================================
 // Detalle de producto (detalleProducto.html)
-// =======================================================
+
 
 const contenedorDetalle = document.getElementById('detalleProducto');
 
@@ -319,7 +514,7 @@ function renderizarDetalleProducto() {
           ? `<img src="${producto.foto}" alt="${producto.producto}" class="img-fluid rounded">`
           : '<div class="bg-secondary rounded" style="height:300px;"></div>'}
       </div>
-      <div class="col-md-6 text-light">
+      <div class="col-md-6 detalle-producto-info">
         <h1>${producto.producto}</h1>
         <p class="fs-3 fw-bold">$${Number(producto.precio).toLocaleString('es-CL')}</p>
         <p>${producto.descripcion || 'Sin descripción disponible.'}</p>

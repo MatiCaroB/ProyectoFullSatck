@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geek&Manga - Panel Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/main.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</head>
+<body class="bg-dark text-light">
+    <header>
+        <img width="300" height="300" src="images/logito.png" alt="logo geek&manga">
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand fw-bold" href="Home.html">Panel Admin</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminMenu"
+                aria-controls="adminMenu" aria-expanded="false" aria-label="abrir menú admin">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="adminMenu">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+                        <li class="nav-item"><a class="nav-link active link-pop" href="Home.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link active link-pop" href="productoagregar.html">Productos</a></li>
+                        <li class="nav-item"><a class="nav-link active link-pop" href="productomostrar.html">Listado</a></li>
+                        <li class="nav-item"><a class="nav-link active link-pop" href="registrarse.html">Usuarios</a></li>
+                        <li class="nav-item"><a class="nav-link active link-pop" href="index.html">Ver tienda</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container my-4">
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">Home Admin</li>
+                
+            </ol>
+        </nav>
+
+        <section class="mb-5">
+            <h1 class="mb-2">Panel de administración</h1>
+        </section>
+
+        <section class="row g-4 mb-5">
+            <div class="col-md-6 col-xl-3">
+                <div class="card h-100 border border-warning bg-dark text-light shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-warning">Productos</h5>
+                        <p class="card-text text-secondary">Agregar y administrar productos del catálogo.</p>
+                        <a href="productoagregar.html" class="btn btn-warning">Ir a productos</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-3">
+                <div class="card h-100 border border-warning bg-dark text-light shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-warning">Listado</h5>
+                        <p class="card-text text-secondary">Revisa los productos registrados y su información.</p>
+                        <a href="productomostrar.html" class="btn btn-warning">Ver listado</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-3">
+                <div class="card h-100 border border-warning bg-dark text-light shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-warning">Usuarios</h5>
+                        <p class="card-text text-secondary">Consulta y administra usuarios del sitio.</p>
+                        <a href="registrarse.html" class="btn btn-warning">Administrar usuarios</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-3">
+                <div class="card h-100 border border-warning bg-dark text-light shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-warning">Tienda</h5>
+                        <p class="card-text text-secondary">Visualiza la vista de usuarios de la tienda.</p>
+                        <a href="index.html" class="btn btn-warning">Ir a inicio</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="row g-4">
+            <div class="col-lg-6">
+                <div class="card bg-dark text-light border border-secondary h-100">
+                    <div class="card-body">
+                        <h2 class="h4 text-warning mb-3">Resumen rápido</h2>
+                        <ul class="list-group list-group-flush bg-dark">
+                            <li class="list-group-item bg-dark text-light border-secondary">Productos activos: 0</li>
+                            <li class="list-group-item bg-dark text-light border-secondary">Usuarios registrados: 0</li>
+                            <li class="list-group-item bg-dark text-light border-secondary">Pedidos pendientes: 0</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card bg-dark text-light border border-secondary h-100">
+                    <div class="card-body">
+                        <h2 class="h4 text-warning mb-3">Acciones rápidas</h2>
+                        <div class="d-grid gap-2">
+                            <a href="productoagregar.html" class="btn btn-outline-warning">Agregar nuevo producto</a>
+                            <a href="productomostrar.html" class="btn btn-outline-warning">Ver productos registrados</a>
+                            <a href="registrarse.html" class="btn btn-outline-warning">Gestionar usuarios</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-light text-center py-4 mt-5 border-top border-secondary">
+        <p class="mb-1">Geek&amp;Manga &copy; 2026</p>
+        <a href="index.html" class="text-light text-decoration-none">Volver a la tienda</a>
+    </footer>
+</body>
+</html>

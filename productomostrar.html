@@ -10,33 +10,55 @@
     <script defer src = "js/app.js"></script>
 
 </head>
-<body>
+<body class="bg-dark text-light">
     <header>
-    
         <img width="300" height="300" src="images/logito.png" alt="logo geek&manga">
-        
+
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand fw-dold" href="index.html"> Home</a>
-                
+                <a class="navbar-brand fw-bold" href="Home.html">Panel Admin</a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#home"
                 aria-controls="home" aria-expanded="false" aria-label="abrir home"><span class="navbar-toggler-icon"></span></button>
-            
-                    <div class="collapse navbar-collapse" id="home">
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item"><a class="nav-link active" href="productoagregar.html">Productos</a></li>
-                            <li class="nav-item"><a class="nav-link active" href="usuarios.html">Usuarios</a></li>
-                            
-                        </ul>
-                    </div>
+
+                <div class="collapse navbar-collapse" id="home">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link active link-pop" href="Home.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link active link-pop" href="productoagregar.html">Productos</a></li>
+                        <li class="nav-item"><a class="nav-link active link-pop" href="productomostrar.html">Listado</a></li>
+                        <li class="nav-item"><a class="nav-link active link-pop" href="registrarse.html">Usuarios</a></li>
+                        <li class="nav-item"><a class="nav-link active link-pop" href="index.html">Ver tienda</a></li>
+                    </ul>
+                </div>
             </div>
-            <main>
-            <h1>Productos</h1>
-        <li class="nav-item"><a class="nav-link active" href="productoagregar.html">Agregar un producto</a></li>
-        <li class="nav-item"><a class="nav-link active" href="productomostrar.html">Lista de productos</a></li>
-            <section class="container my-5">
-                <h2 class="text-light mb-4">Productos Registrados</h2>
-                    <div id="listaProductos" class="row row-cols-1 row-cols-md-3 g-4">
-                    </div>
-            </section>
-            <main>
+        </nav>
+    </header>
+
+    <main class="container my-4">
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="Home.html">Home Admin</a></li>
+                <li class="breadcrumb-item active text-light">Listado</li>
+            </ol>
+        </nav>
+
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+            <h1 class="mb-0">Lista de productos</h1>
+            <div class="d-flex gap-2 flex-wrap">
+                <a class="btn btn-warning fw-bold" href="productoagregar.html">Agregar un producto</a>
+                
+            </div>
+        </div>
+
+        <section class="container my-5">
+            <h2 class="text-light mb-4">Productos Registrados</h2>
+            <div id="listaProductos" class="row row-cols-1 row-cols-md-3 g-4"></div>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-light text-center py-4 mt-5">
+        <p class="mb-1">Geek&amp;Manga &copy; 2026</p>
+        <a href="contacto.html" class="text-light text-decoration-none">Contacto</a>
+    </footer>
+</body>
+</html>

@@ -9,19 +9,22 @@
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="js/app.js"></script>
 </head>
-<body class="bg-dark">
+<body class="bg-dark text-light">
     <header>
         <img width="300" height="300" src="images/logito.png" alt="logo geek&manga">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand fw-bold" href="index.html">Home</a>
+                <a class="navbar-brand fw-bold" href="Home.html">Panel Admin</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#home">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="home">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link active" href="productoagregar.html">Productos</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="usuarios.html">Usuarios</a></li>
+                        <li class="nav-item"><a class="nav-link active link-pop" href="Home.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link active link-pop" href="productoagregar.html">Productos</a></li>
+                        <li class="nav-item"><a class="nav-link active link-pop" href="productomostrar.html">Listado</a></li>
+                        <li class="nav-item"><a class="nav-link active link-pop" href="registrarse.html">Usuarios</a></li>
+                        <li class="nav-item"><a class="nav-link active link-pop" href="index.html">Ver tienda</a></li>
                     </ul>
                 </div>
             </div>
@@ -29,10 +32,22 @@
     </header>   
 
     <main class="container my-4">
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="Home.html">Home Admin</a></li>
+                <li class="breadcrumb-item">Productos</li>
+                
+            </ol>
+        </nav>
+
         <h1 class="text-light">Productos</h1>
         <section class="container">
             <form id="formContacto" class="bg-dark p-4 my-4 rounded shadow-sm mx-auto border border-secondary">
                 <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="codigo" class="form-label text-light">Código</label>
+                        <input type="text" required id="codigo" name="codigo" class="form-control bg-dark text-light">
+                    </div>
                     <div class="col-md-6 mb-3">
                         <label for="producto" class="form-label text-light">Nombre del Producto</label>
                         <input type="text" required id="producto" name="producto" class="form-control bg-dark text-light">
@@ -44,6 +59,24 @@
                     <div class="col-md-6 mb-3">
                         <label for="marca" class="form-label text-light">Marca del producto</label>
                         <input type="text" required id="marca" name="marca" class="form-control bg-dark text-light">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="stock" class="form-label text-light">Stock</label>
+                        <input type="number" min="0" required id="stock" name="stock" class="form-control bg-dark text-light">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="stockCritico" class="form-label text-light">Stock crítico</label>
+                        <input type="number" min="0" id="stockCritico" name="stockCritico" class="form-control bg-dark text-light">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="categoria" class="form-label text-light">Categoría</label>
+                        <select id="categoria" name="categoria" class="form-select bg-dark text-light" required>
+                            <option value="">Selecciona</option>
+                            <option value="Manga">Manga</option>
+                            <option value="Comic">Comic</option>
+                            <option value="Figura">Figura</option>
+                            <option value="Accesorio">Accesorio</option>
+                        </select>
                     </div>
                 </div>
                 <div class="mb-3">
@@ -65,7 +98,7 @@
         <section class="container my-5">
             <h2 class="text-light mb-4">Productos Registrados</h2>
             <div id="listaProductos" class="row row-cols-1 row-cols-md-3 g-4">
-                <!-- JavaScript insertará las tarjetas aquí -->
+                
             </div>
         </section>
     </main>

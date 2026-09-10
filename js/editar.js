@@ -90,6 +90,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const index = productos.findIndex(item => String(item.id) === String(idParam));
 
             if (index !== -1) {
+                const codigoNuevo = inputCodigo ? inputCodigo.value.trim() : '';
+                if (!codigoNuevo || codigoNuevo.length < 3) {
+                    alert('El código del producto debe tener al menos 3 caracteres.');
+                    return;
+                }
+
+                const codigoDuplicado = productos.some((item, idx) => idx !== index && String(item.codigo).toLowerCase() === codigoNuevo.toLowerCase());
+                if (codigoDuplicado) {
+                    alert('Ya existe otro producto con ese código.');
+                    return;
+                }
+
+                productos[index].codigo = codigoNuevo;
                 productos[index].producto = inputProducto.value.trim();
                 productos[index].precio = parseFloat(inputPrecio.value);
                 if (inputMarca) productos[index].marca = inputMarca.value.trim();

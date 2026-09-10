@@ -38,8 +38,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const correoNormalizado = inputCorreo.value.trim().toLowerCase();
+    const passwordIngresada = inputPassword.value;
+
+    const adminPorDefecto = {
+      id: 'admin-1',
+      nombre: 'Administrador',
+      correo: 'admin@gmail.com',
+      password: 'admin123',
+      tipoUsuario: 'Administrador'
+    };
+
+    const existeAdmin = usuarios.some((u) => u.correo === adminPorDefecto.correo);
+    if (!existeAdmin) {
+      usuarios.push(adminPorDefecto);
+      localStorage.setItem('usuarios', JSON.stringify(usuarios));
+    }
+
     const usuario = usuarios.find(
-      (u) => u.correo === correoNormalizado && u.password === inputPassword.value
+      (u) => u.correo === correoNormalizado && u.password === passwordIngresada
     );
 
     if (!usuario) {
@@ -50,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    //no recuerdo k hace esto pero se saco de guugle
     sessionStorage.setItem(
       'usuarioActivo',
       JSON.stringify({
@@ -62,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     if (usuario.tipoUsuario === 'Administrador' || usuario.tipoUsuario === 'Vendedor') {
-      window.location.href = 'productomostrar.html';
+      window.location.href = 'Home.html';
     } else {
       window.location.href = 'homeU.html';
     }
